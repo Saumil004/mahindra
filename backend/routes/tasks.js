@@ -2,13 +2,11 @@ import express from 'express';
 const router = express.Router();
 import Task from '../models/task';
 
-// Get all tasks
 router.get('/', async (req, res) => {
   const tasks = await Task.find();
   res.json(tasks);
 });
 
-// Create a new task
 router.post('/', async (req, res) => {
   const { title } = req.body;
   if (!title) {
@@ -19,7 +17,6 @@ router.post('/', async (req, res) => {
   res.status(201).json(task);
 });
 
-// Update task status
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -34,7 +31,6 @@ router.put('/:id', async (req, res) => {
   res.json(task);
 });
 
-// Delete a task
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const task = await Task.findByIdAndDelete(id);
